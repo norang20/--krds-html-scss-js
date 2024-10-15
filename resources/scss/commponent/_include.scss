@@ -1,3 +1,8 @@
-@import 'variables';
-@import 'mixins';
-@import 'reset';
+@import 'variables'; /* 순서1 */
+
+@import './group_mixins';/* 순서2 */
+
+@import 'reset';/* 순서3 */
+
+@import './group_components';
+@import './group_forms';
