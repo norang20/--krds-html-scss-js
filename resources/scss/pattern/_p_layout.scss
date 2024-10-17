@@ -3,17 +3,48 @@
   background-color: $gray-5;
 }
 
-
 // grid layout
 .inner {
   position: relative;
   width: 100%;
   max-width: $grid;
   margin: 0 auto;
-  padding: 0 $padding-mobile;
+  padding: 0 $p-mobile;
+  @include tablet {
+    padding: 0 $p-tablet;
+  }
+}
 
-  @include tablet{
-    padding: 0 $padding-tablet;
+#skip-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  width: 100%;
+  text-align: center;
+  background-color: $gray-90;
+  a {
+    &:not(:focus) {
+      @include sr-only;
+    }
+    &:focus {
+      @include flex-layout($ai: center, $jc: center);
+      @include focus($color: $white, $alpha: 0.9);
+      font-size: 1.5rem;
+      color: $white;
+      width: 100%;
+      height: 3.2rem;
+      margin: 0 auto;
+      text-align: center;
+    }
+  }
+  &.type1 {
+    background-color: var(--#{$prefix}white);
+    a {
+      &:focus {
+        color: var(--#{$prefix}gray-90);
+      }
+    }
   }
 }
 
@@ -30,8 +61,11 @@
     gap: 10px;
     position: absolute;
     top: 17px;
-    right: 30px;
+    right: $p-mobile;
     font-size: 2rem;
+    @include mobileMore {
+      right: $p-tablet;
+    }
     &::after {
       content: "\f061";
       font-family: "Line Awesome Free";
@@ -43,6 +77,238 @@
       height: 40px;
       background: $gray-20;
       border-radius: 50%;
+    }
+  }
+}
+
+// header
+#header {
+  position: relative;
+  // top: 0;
+  // left: 0;
+  // right: 0;
+  z-index: 1000;
+  
+  &::before {
+    display: none;
+    content: "";
+    position: absolute;
+    top: 102px;
+    left: 0;
+    right: 0;
+    height: 218px;
+    background: $gray-5;
+  }
+  .inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: none;
+    height: 73px;
+    @include tabletMore{
+      height: auto;
+    }
+  }
+  #logo {
+    transform: scale(0.8);
+    transform-origin: 0 50%;
+    @include tabletMore{
+      transform: none;
+    }
+    a {
+      display: block;
+      width: 200px;
+      height: 35px;
+      background: url("../../../resources/images/logo.png") no-repeat 0 0 / contain;
+      /* background-size: contain 잘리지 않는다 */
+
+    }
+    span {
+      @include sr-only;
+    }
+  }
+  &.active{
+    &::before{
+      display: block;
+    }
+    .gnb__depth2 {
+      display: block;
+    }
+   
+  }
+}
+
+#gnb {
+  display: none;
+  position: relative;
+  @include tabletMore{
+    display: block;
+  }
+  .gnb__depth1 {
+    display: flex;
+    > li {
+      position: relative;
+      &:hover {
+        > a > span {
+          color: $primary;
+          &::after {
+            width: 100%; /* 밑줄이 원래 없다가 after전후문자 선택자 width:0 이었다가  선이 펼쳐진다 */
+          }
+        }
+      }
+      &:first-child {
+        .gnb__depth2 {
+          &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 1px;
+            height: 100%;
+            background: $gray-20;
+          }
+        }
+      }
+      > a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 102px;
+        padding: 0 50px;
+        font-size: 2rem;
+        font-weight: $font-weight-bold;
+        span {
+          position: relative;
+          display: flex;
+          align-items: center;
+          height: 100%;
+          &::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%; /* 가운데 정렬 */
+            transform: translateX(-50%); /* 실제 가운데로 옮기기 */
+            width: 0;
+            height: 5px;
+            background: $primary;
+            transition: all 0.3s;
+          }
+        }
+      }
+    }
+  }
+  .gnb__depth2 {
+    display: none;
+    position: absolute;
+    top: 102px;
+    left: 0;
+    right: 0;
+    padding: 30px 0;
+    background: $gray-5;
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 1px;
+      height: 100%;
+      background: $gray-20;
+    }
+    a {
+      display: block;
+      padding: 7px 0;
+      text-align: center;
+      color: $gray-70;
+      &:hover{
+        font-weight: $font-weight-bold;
+        color:$gray-90;
+      }
+    }
+    
+  }
+}
+
+.util{
+  display: flex;
+  gap:15px;
+  .lang{
+    display: none;
+    @include tabletMore{
+      display: block;
+    }
+    position: relative;
+    &__btn{
+      height: 57px;
+      margin-right: 10px;
+      font-size: 2rem;
+      text-transform: uppercase;
+      &::after{
+        content: "\f0d7";
+        font-family: 'FontAwesome';
+        margin-left: 5px;
+        color:$gray-50;
+        }
+    }
+  
+    
+    &__lst{
+     display: none;
+     position: absolute;
+     top: 52px;
+     left: 0;
+     width: 90%;
+     border: 1px solid $gray-40;
+     background: $white;
+     text-align: center;
+      li{
+        padding: 5px 0;
+        text-transform: uppercase;
+        &:first-child {
+          border-bottom: 1px solid $gray-40;
+        }
+      }
+    }
+  }
+
+  .search{
+    
+    transform: scaleX(-1);
+    &::before{
+      content:"\f002";
+      font-family: 'FontAwesome';
+      font-size: 3.8rem;
+    }
+  }
+  .all-menu{
+    &::before{
+      content: "\f0c9";
+      font-family: 'FontAwesome';
+      font-size: 3.8rem;
+      
+    }
+  }
+}
+
+#nav-all{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height: 100%;
+  background-color: rgba($color: white, $alpha: 0.9);
+  padding: $p-mobile;
+  backdrop-filter: blur(10px);
+  .gnb__depth1{
+    display: flex;
+    flex-direction: column;
+    width:300px;
+    border: 1px solid red;
+    &>li{
+      a{
+        display: inline-block;
+        width: 100%;
+        height:50px;
+      }
     }
   }
 }

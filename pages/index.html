@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="../resources/css/styles.css" />
     <!-- js -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/9d37948b2c.js" crossorigin="anonymous"></script> <!-- fontAwesome -->
   </head>
   <body>
     <div id="skip-nav">
@@ -28,10 +29,108 @@
       <a href="#container">본문 바로가기</a>
     </div>
     <div id="wrap">
-      <header id="header">
-        <h1><a href="#">logo</a></h1>
-        <nav>nav</nav>
-        <div class="util">util</div>
+      <header id="header"> <!-- active 추가시 depth2 활성화 -->
+        <div class="inner">
+          <h1 id="logo">
+            <a href="#">
+              <span>LOGO</span>
+            </a>
+          </h1>
+          
+          <nav id="gnb" class="gnb">
+            <ul class="gnb__depth1">
+              <li>
+                <a href="#"><span>menu1</span></a>
+                <ul class="gnb__depth2">
+                  <li><a href="#">menu1-1</a></li>
+                  <li><a href="#">menu1-2</a></li>
+                  <li><a href="#">menu1-3</a></li>
+                  <li><a href="#">menu1-4</a></li>
+                </ul>
+              </li>
+              <li><a href="#"><span>menu2</span></a>
+                <ul class="gnb__depth2">
+                  <li><a href="#">menu2-1</a></li>
+                  <li><a href="#">menu2-2</a></li>
+                  <li><a href="#">menu2-3</a></li>
+                  <li><a href="#">menu2-4</a></li>
+                </ul>
+              </li>
+              <li><a href="#"><span>menu3</span></a>
+                <ul class="gnb__depth2">
+                  <li><a href="#">menu3-1</a></li>
+                  <li><a href="#">menu3-2</a></li>
+                  <li><a href="#">menu3-3</a></li>
+                  <li><a href="#">menu3-4</a></li>
+                </ul>
+              </li>
+              <li><a href="#"><span>menu4</span></a>
+                <ul class="gnb__depth2">
+                  <li><a href="#">menu4-1</a></li>
+                  <li><a href="#">menu4-2</a></li>
+                  <li><a href="#">menu4-3</a></li>
+                  <li><a href="#">menu4-4</a></li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+          
+          <div class="util">
+            <div class="lang">
+              <button class="lang__btn">kor</button>
+              <ul class="lang__lst">
+                <li>kor</li>
+                <li>eng</li>
+              </ul>
+            </div>
+            <button class="search">
+              <span class="blind">검색</span>
+            </button>
+            <button class="all-menu">
+              <span class="blind">전체메뉴</span>
+            </button>
+          </div>
+        </div>
+        <div id="nav-all">
+          <ul class="gnb__depth1">
+            <li>
+              <a href="#"><span>menu1</span></a>
+              <ul class="gnb__depth2">
+                <li><a href="#">menu1-1</a></li>
+                <li><a href="#">menu1-2</a></li>
+                <li><a href="#">menu1-3</a></li>
+                <li><a href="#">menu1-4</a></li>
+              </ul>
+            </li>
+            <li><a href="#"><span>menu2</span></a>
+              <ul class="gnb__depth2">
+                <li><a href="#">menu2-1</a></li>
+                <li><a href="#">menu2-2</a></li>
+                <li><a href="#">menu2-3</a></li>
+                <li><a href="#">menu2-4</a></li>
+              </ul>
+            </li>
+            <li><a href="#"><span>menu3</span></a>
+              <ul class="gnb__depth2">
+                <li><a href="#">menu3-1</a></li>
+                <li><a href="#">menu3-2</a></li>
+                <li><a href="#">menu3-3</a></li>
+                <li><a href="#">menu3-4</a></li>
+              </ul>
+            </li>
+            <li><a href="#"><span>menu4</span></a>
+              <ul class="gnb__depth2">
+                <li><a href="#">menu4-1</a></li>
+                <li><a href="#">menu4-2</a></li>
+                <li><a href="#">menu4-3</a></li>
+                <li><a href="#">menu4-4</a></li>
+              </ul>
+            </li>
+          </ul>
+          <button class="close">
+            <span class="blind">전체메뉴 닫기</span>
+          </button>
+        </div><!-- nav all -->
       </header>
       <div class="slide">
         <!-- Slider main container -->
@@ -57,12 +156,35 @@
             </div>
             <div class="swiper-slide">
               <a href="#">
-                <img src="https://www.hera.com/kr/ko/layout/main/upper-slide/__icsFiles/afieldfile/2024/10/14/241014_final_KR_Main-KV_PC01.jpg" alt="hera" />
+                <picture>
+                  <source srcset="https://www.hera.com/kr/ko/resource/image/library/2024/brand_story_intro_pc_kr_240312.jpg" media="(min-width: 1024px)" /><!-- 1024px 이상 일경우 해당 이미지 보여줘 -->
+                  <source srcset="https://cdn.pharmnews.com/news/photo/202404/241876_116860_813.jpg" media="(min-width: 600px)" /><!-- 600px 이상일때 해당 이미지 보여줘 -->
+                  <img src="https://images-kr.amoremall.com/sis/images/2023/11/23/54e4bf3f-0f2e-4ab2-ac0a-1fa85bafca8b.jpg?format=webp&fitting=large|375:375" alt="foundation" />
+                </picture>
+                <div class="text-area">
+                  <div class="inner">
+                    <strong class="text-area__tit">슬라이드 제목</strong>
+                    <p class="text-area__cont">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+                    <span class="text-area__goto text-area__goto--hidden">바로가기</span>
+                  </div>
+                  
+                </div>
               </a>
             </div>
             <div class="swiper-slide">
               <a href="#">
-                <img src="https://tamburins-resource.s3.ap-northeast-2.amazonaws.com/mainbanner/9200f30c-89e1-4183-a953-95a86ed947e6/pc_main_banner_full.jpg" alt="hera" />
+                <picture>
+                  <source srcset="https://www.hera.com/kr/ko/resource/image/library/2024/brand_story_intro_pc_kr_240312.jpg" media="(min-width: 1024px)" /><!-- 1024px 이상 일경우 해당 이미지 보여줘 -->
+                  <source srcset="https://cdn.pharmnews.com/news/photo/202404/241876_116860_813.jpg" media="(min-width: 600px)" /><!-- 600px 이상일때 해당 이미지 보여줘 -->
+                  <img src="https://images-kr.amoremall.com/sis/images/2023/11/23/54e4bf3f-0f2e-4ab2-ac0a-1fa85bafca8b.jpg?format=webp&fitting=large|375:375" alt="foundation" />
+                </picture>
+                <div class="text-area">
+                  <div class="inner">
+                    <strong class="text-area__tit">슬라이드 제목</strong>
+                    <p class="text-area__cont">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+                    <span class="text-area__goto text-area__goto--hidden">바로가기</span>
+                  </div>
+                </div>
               </a>
             </div>
           </div>
@@ -198,7 +320,7 @@
         slidesPerView: 1,
         spaceBetween: 30,
         pagination: {
-          el: ".swiper-pagination",
+          el: ".slide-studio .swiper-pagination",
           clickable: true,
         },
         breakpoints: {

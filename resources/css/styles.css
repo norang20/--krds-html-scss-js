@@ -3183,11 +3183,6 @@ input[type=checkbox] {
   border-width: 2px;
 }
 
-#skip-nav,
-#header {
-  display: none;
-}
-
 :root {
   --swiper-theme-color: red;
 }
@@ -3237,17 +3232,20 @@ input[type=checkbox] {
 
 .slide-intro .swiper-slide {
   position: relative;
-  /* img {
-    object-position: 50% 100%;
-  } */
+}
+.slide-intro .swiper-slide.swiper-slide-active .text-area {
+  opacity: 1;
+  transform: translate(-50%, -50%);
 }
 .slide-intro .swiper-slide .text-area {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, 0);
   width: 70%;
   max-width: 400px;
+  opacity: 0;
+  transition: all 0.5s;
 }
 .slide-intro .swiper-slide .text-area__tit {
   font-size: 3rem;
@@ -3338,6 +3336,47 @@ input[type=checkbox] {
   }
 }
 
+#skip-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  width: 100%;
+  text-align: center;
+  background-color: #1D1D1D;
+}
+#skip-nav a:not(:focus) {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+#skip-nav a:focus {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  outline-offset: -0.4rem;
+  outline: 2px solid rgba(255, 255, 255, 0.9);
+  font-size: 1.5rem;
+  color: #fff;
+  width: 100%;
+  height: 3.2rem;
+  margin: 0 auto;
+  text-align: center;
+}
+#skip-nav.type1 {
+  background-color: var(--krds-white);
+}
+#skip-nav.type1 a:focus {
+  color: var(--krds-gray-90);
+}
+
 .sec-g {
   padding: 10vw 0;
 }
@@ -3351,8 +3390,13 @@ input[type=checkbox] {
   gap: 10px;
   position: absolute;
   top: 17px;
-  right: 30px;
+  right: 20px;
   font-size: 2rem;
+}
+@media (min-width: 600px) {
+  .sec-g__more {
+    right: 30px;
+  }
 }
 .sec-g__more::after {
   content: "\f061";
@@ -3365,4 +3409,228 @@ input[type=checkbox] {
   height: 40px;
   background: #E4E4E4;
   border-radius: 50%;
+}
+
+#header {
+  position: relative;
+  z-index: 1000;
+}
+#header::before {
+  display: none;
+  content: "";
+  position: absolute;
+  top: 102px;
+  left: 0;
+  right: 0;
+  height: 218px;
+  background: #F8F8F8;
+}
+#header .inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: none;
+  height: 73px;
+}
+@media (min-width: 1024px) {
+  #header .inner {
+    height: auto;
+  }
+}
+#header #logo {
+  transform: scale(0.8);
+  transform-origin: 0 50%;
+}
+@media (min-width: 1024px) {
+  #header #logo {
+    transform: none;
+  }
+}
+#header #logo a {
+  display: block;
+  width: 200px;
+  height: 35px;
+  background: url("../../../resources/images/logo.png") no-repeat 0 0/contain;
+  /* background-size: contain 잘리지 않는다 */
+}
+#header #logo span {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+#header.active::before {
+  display: block;
+}
+#header.active .gnb__depth2 {
+  display: block;
+}
+
+#gnb {
+  display: none;
+  position: relative;
+}
+@media (min-width: 1024px) {
+  #gnb {
+    display: block;
+  }
+}
+#gnb .gnb__depth1 {
+  display: flex;
+}
+#gnb .gnb__depth1 > li {
+  position: relative;
+}
+#gnb .gnb__depth1 > li:hover > a > span {
+  color: #246BEB;
+}
+#gnb .gnb__depth1 > li:hover > a > span::after {
+  width: 100%; /* 밑줄이 원래 없다가 after전후문자 선택자 width:0 이었다가  선이 펼쳐진다 */
+}
+#gnb .gnb__depth1 > li:first-child .gnb__depth2::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100%;
+  background: #E4E4E4;
+}
+#gnb .gnb__depth1 > li > a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 102px;
+  padding: 0 50px;
+  font-size: 2rem;
+  font-weight: 700;
+}
+#gnb .gnb__depth1 > li > a span {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+#gnb .gnb__depth1 > li > a span::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%; /* 가운데 정렬 */
+  transform: translateX(-50%); /* 실제 가운데로 옮기기 */
+  width: 0;
+  height: 5px;
+  background: #246BEB;
+  transition: all 0.3s;
+}
+#gnb .gnb__depth2 {
+  display: none;
+  position: absolute;
+  top: 102px;
+  left: 0;
+  right: 0;
+  padding: 30px 0;
+  background: #F8F8F8;
+}
+#gnb .gnb__depth2::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 1px;
+  height: 100%;
+  background: #E4E4E4;
+}
+#gnb .gnb__depth2 a {
+  display: block;
+  padding: 7px 0;
+  text-align: center;
+  color: #555555;
+}
+#gnb .gnb__depth2 a:hover {
+  font-weight: 700;
+  color: #1D1D1D;
+}
+
+.util {
+  display: flex;
+  gap: 15px;
+}
+.util .lang {
+  display: none;
+  position: relative;
+}
+@media (min-width: 1024px) {
+  .util .lang {
+    display: block;
+  }
+}
+.util .lang__btn {
+  height: 57px;
+  margin-right: 10px;
+  font-size: 2rem;
+  text-transform: uppercase;
+}
+.util .lang__btn::after {
+  content: "\f0d7";
+  font-family: "FontAwesome";
+  margin-left: 5px;
+  color: #8E8E8E;
+}
+.util .lang__lst {
+  display: none;
+  position: absolute;
+  top: 52px;
+  left: 0;
+  width: 90%;
+  border: 1px solid #C6C6C6;
+  background: #fff;
+  text-align: center;
+}
+.util .lang__lst li {
+  padding: 5px 0;
+  text-transform: uppercase;
+}
+.util .lang__lst li:first-child {
+  border-bottom: 1px solid #C6C6C6;
+}
+.util .search {
+  transform: scaleX(-1);
+}
+.util .search::before {
+  content: "\f002";
+  font-family: "FontAwesome";
+  font-size: 3.8rem;
+}
+.util .all-menu::before {
+  content: "\f0c9";
+  font-family: "FontAwesome";
+  font-size: 3.8rem;
+}
+
+#nav-all {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+}
+#nav-all .gnb__depth1 {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  border: 1px solid red;
+}
+#nav-all .gnb__depth1 > li a {
+  display: inline-block;
+  width: 100%;
+  height: 50px;
 }/*# sourceMappingURL=styles.css.map */
